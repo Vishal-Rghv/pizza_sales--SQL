@@ -50,7 +50,7 @@ ORDER BY
 
 -- Daily and Cumulative Revenue--
 
-![Cumulative Revenue Output]([images/cumulative_revenue.png](https://github.com/Vishal-Rghv/pizza_sales--SQL/blob/424f8b2aba57bfc42dc0a1d71744c14260ebd881/Screenshot%20.png
-))
+![Cumulative Revenue Output](https://github.com/Vishal-Rghv/pizza_sales--SQL/blob/424f8b2aba57bfc42dc0a1d71744c14260ebd881/Screenshot%20.png
+)
 
 
