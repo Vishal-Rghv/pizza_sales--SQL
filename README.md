@@ -24,18 +24,30 @@ This project analyzes pizza sales data to answer key business questions like:
   
 --Example Query--
 ```sql
--- Top 3 most ordered pizza types per category by revenue
-SELECT category, pizza_id, revenue
-FROM (
+--  Daily and cumulative revenue analysis
+
+SELECT 
+    order_date,
+    ROUND(revenue, 2) AS daily_revenue,
+    ROUND(SUM(revenue) OVER (ORDER BY order_date), 2) AS cum_revenue -- adding revenue day by day,
+															      -- order by order, or month by month
+FROM
+(
     SELECT 
-        pt.category,
-        p.pizza_id,
-        SUM(od.quantity * p.price) AS revenue,
-        RANK() OVER (PARTITION BY pt.category ORDER BY SUM(od.quantity * p.price) DESC) AS ranking
+        orders.order_date,
+        SUM(order_details.quantity * pizzas.price) AS revenue
     FROM 
-        pizza_types pt
-    JOIN pizzas p ON pt.pizza_type_id = p.pizza_type_id
-    JOIN order_details od ON od.pizza_id = p.pizza_id
-    GROUP BY pt.category, p.pizza_id
-) AS ranked
-WHERE ranking <= 3;
+        order_details 
+    JOIN 
+        pizzas ON order_details.pizza_id = pizzas.pizza_id
+    JOIN 
+        orders ON orders.order_id = order_details.order_id
+    GROUP BY 
+        orders.order_date
+) AS daily_sales
+ORDER BY 
+    order_date;
+
+
+
+
