@@ -22,8 +22,9 @@ This project analyzes pizza sales data to answer key business questions like:
 -  Sample data used for testing
 
   
- --Example Query--
-Top 3 most ordered pizza types per category by revenue
+--Example Query--
+```sql
+-- Top 3 most ordered pizza types per category by revenue
 SELECT category, pizza_id, revenue
 FROM (
     SELECT 
